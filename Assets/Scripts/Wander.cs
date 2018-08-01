@@ -16,7 +16,7 @@ public class Wander : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         minX = -45.0f;
-        minX = 45.0f;
+        maxX = 45.0f;
 
         minZ = -45.0f;
         maxZ = 45.0f;
