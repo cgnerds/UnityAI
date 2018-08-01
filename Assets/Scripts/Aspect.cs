@@ -8,5 +8,5 @@ public class Aspect : MonoBehaviour {
         ENEMY,
     }
 
-    public AspectTypes aspectTypes;
+    public AspectTypes aspectType;
 }
