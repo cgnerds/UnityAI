@@ -66,6 +66,5 @@ public class Perspective : Sense{
         Debug.DrawLine(transform.position, frontRayPoint, Color.green);
         Debug.DrawLine(transform.position, leftRayPoint, Color.green);
         Debug.DrawLine(transform.position, rightRayPoint, Color.green);
-
     }
 }
