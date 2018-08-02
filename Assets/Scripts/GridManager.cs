@@ -6,7 +6,7 @@ public class GridManager : MonoBehaviour {
     [SerializeField]
     private int numberOfRows = 20;
     [SerializeField]
-    public int numberOfColums = 20;
+    public int numberOfColumns = 20;
     [SerializeField]
     public float gridCellSize = 2;
     [SerializeField]
@@ -29,10 +29,10 @@ public class GridManager : MonoBehaviour {
 
     private void InitializeNodes()
     {
-        nodes = new Node[numberOfColums, numberOfRows];
+        nodes = new Node[numberOfColumns, numberOfRows];
 
         int index = 0;
-        for(int i = 0; i < numberOfColums; i++)
+        for(int i = 0; i < numberOfColumns; i++)
         {
             for(int j = 0; j < numberOfRows; j++)
             {
@@ -90,24 +90,24 @@ public class GridManager : MonoBehaviour {
         int column = (int)(position.x / gridCellSize);
         int row = (int)(position.z / gridCellSize);
 
-        return (row * numberOfColums + column);
+        return (row * numberOfColumns + column);
     }
 
     private int GetRowOfIndex(int index)
     {
-        int row = index / numberOfColums;
+        int row = index / numberOfColumns;
         return row;
     }
 
     private int GetColumnOfIndex(int index)
     {
-        int col = index % numberOfColums;
+        int col = index % numberOfColumns;
         return col;
     }
 
     private bool IsInBounds(Vector3 position)
     {
-        float width = numberOfColums * gridCellSize;
+        float width = numberOfColumns * gridCellSize;
         float height = numberOfRows * gridCellSize;
 
         return (position.x >= Origin.x && position.x <= Origin.x + width && position.z <= Origin.z + height && position.z >= Origin.z);
@@ -145,13 +145,59 @@ public class GridManager : MonoBehaviour {
     // Check the neighbor. If it's not an obstacle, assign the neighbor.
     private void AssignNeighbor(int row, int column, ArrayList neighbors)
     {
-        if(row != -1 && column != -1 && row < numberOfRows && column < numberOfColums)
+        if(row != -1 && column != -1 && row < numberOfRows && column < numberOfColumns)
         {
             Node nodeToAdd = nodes[row, column];
             if(!nodeToAdd.bObstacle)
             {
                 neighbors.Add(nodeToAdd);
             }
+        }
+    }
+
+    // Show Debug Grids and obstacles inside the editor
+    private void OnDrawGizmos()
+    {
+        if(showGrid)
+        {
+            DebugDrawGrid(transform.position, numberOfRows, numberOfColumns, gridCellSize, Color.blue);
+        }
+
+        Gizmos.DrawSphere(transform.position, 0.5f);
+
+        if(showObstacleBlocks)
+        {
+            Vector3 cellSize = new Vector3(gridCellSize, 1.0f, gridCellSize);
+
+            if(obstacleList != null && obstacleList.Length > 0)
+            {
+                foreach(GameObject data in obstacleList)
+                {
+                    Gizmos.DrawCube(GetGridCellCenter(GetGridIndex(data.transform.position)), cellSize);
+                }
+            }
+        }
+    }
+
+    private void DebugDrawGrid(Vector3 origin, int numRows, int numCols, float cellSize, Color color)
+    {
+        float width = (numCols * cellSize);
+        float height = (numRows * cellSize);
+
+        // Draw the horizontal grid lines
+        for(int i =0; i < numRows + 1; i++)
+        {
+            Vector3 startPos = origin + i * cellSize * new Vector3(0.0f, 0.0f, 1.0f);
+            Vector3 endPos = startPos + width * new Vector3(1.0f, 0.0f, 0.0f);
+            Debug.DrawLine(startPos, endPos, color);
+        }
+
+        // Draw the vertical grid lines
+        for (int i = 0; i < numCols + 1; i++)
+        {
+            Vector3 startPos = origin + i * cellSize * new Vector3(1.0f, 0.0f, 0.0f);
+            Vector3 endPos = startPos + height * new Vector3(0.0f, 0.0f, 1.0f);
+            Debug.DrawLine(startPos, endPos, color);
         }
     }
 }
