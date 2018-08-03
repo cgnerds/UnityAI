@@ -59,7 +59,7 @@ public class GridManager : MonoBehaviour {
         }
     }
 
-    private Vector3 GetGridCellCenter(int index)
+    public Vector3 GetGridCellCenter(int index)
     {
         Vector3 cellPosition = GetGridCellPositionAtIndex(index);
         cellPosition.x += (gridCellSize / 2.0f);

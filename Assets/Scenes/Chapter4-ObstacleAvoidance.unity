@@ -1174,6 +1174,7 @@ GameObject:
   - component: {fileID: 992118018}
   - component: {fileID: 992118017}
   - component: {fileID: 992118016}
+  - component: {fileID: 992118020}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -1250,6 +1251,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1818360609 &992118020
+RotationConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 992118015}
+  m_Enabled: 1
+  m_Weight: 1
+  m_RotationAtRest: {x: 0, y: 68, z: 0}
+  m_RotationOffset: {x: 0, y: 0, z: 0}
+  m_AffectRotationX: 0
+  m_AffectRotationY: 1
+  m_AffectRotationZ: 1
+  m_IsContraintActive: 0
+  m_IsLocked: 1
+  m_Sources:
+  - sourceTransform: {fileID: 0}
+    weight: 1
 --- !u!1 &1329539193
 GameObject:
   m_ObjectHideFlags: 0
