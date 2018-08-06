@@ -19,7 +19,7 @@ public class Boid : MonoBehaviour {
     public void Awake()
     {
         direction = transform.forward.normalized;
-        if(flockController == null)
+        if(flockController != null)
         {
             Debug.LogError("You must assign a flock controller!");
         }
